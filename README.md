@@ -7,3 +7,6 @@ training data is record from 50Hz Linux Simulator,
 test model on 10Hz Mac Simulator
 
 changed drive.py to have same resized image as training
+
+the current result is on Youtube:
+https://youtu.be/_p_6cAVHrHk
