@@ -13,8 +13,14 @@ def read_log_data():
     X_train_ = []
     y_train_ = []
     for line in f.readlines():
-        X_train_.append(line.split(',')[0].replace('/home/qitonghu/Desktop/simulator-linux/',''))
+        X_train_.append(line.split(',')[0].replace('/home/qitonghu/Desktop/simulator-linux/','data/'))
         y_train_.append(float(line.split(',')[3]))
+    f.close()
+    f = open('swingback/driving_log.csv')
+    for line in f.readlines():
+        X_train_.append(line.split(',')[0])
+        y_train_.append(float(line.split(',')[3]))
+    f.close()
     return X_train_, y_train_
 
 X_train_data, y_train_data = read_log_data()
@@ -24,14 +30,14 @@ X_train_data, y_train_data = shuffle(X_train_data, y_train_data)
 
 
 def get_image(file_path):
-    image = cv2.imread('data/' + file_path)
+    image = cv2.imread(file_path)
     image = cv2.resize(image, (80, 160))
     image = np.asarray(image, dtype=float)
     # image = np.array([np.dot(image[..., :3], [0.299, 0.587, 0.114]) / 255.0]).T
     image = (image / 255.) * 2 - 1.0
     return np.array(image)
 
-def get_batch(batch_size=128):
+def get_batch(batch_size=256):
     while 1:
         for i in range(len(y_train_data) // batch_size):
             start_index = i * batch_size
@@ -56,7 +62,7 @@ def build_model():
     for i in range(1, len(nb_kernels)):
         model.add(Convolution2D(nb_kernels[i], kernel_sizes[i], kernel_sizes[i]))
         model.add(MaxPooling2D((kernel_strides[i], kernel_strides[i])))
-        #model.add(Dropout(0.5))
+        model.add(Dropout(0.5))
         model.add(Activation('tanh'))
 
     # FC
@@ -64,7 +70,7 @@ def build_model():
     nb_neurons = [100, 50, 10]
     for i in range(len(nb_neurons)):
         model.add(Dense(nb_neurons[i]))
-        #model.add(Dropout(0.5))
+        model.add(Dropout(0.5))
         model.add(Activation('tanh'))
 
     # output
@@ -75,8 +81,8 @@ def build_model():
 
 
 def train_model(model):
-    history = model.fit_generator(get_batch(), samples_per_epoch=len(y_train_data)*3,
-                                  nb_epoch=20)
+    history = model.fit_generator(get_batch(), samples_per_epoch=len(y_train_data),
+                                  nb_epoch=120)
     f = open('model.json', 'w')
     f.write(model.to_json())
     f.close()
