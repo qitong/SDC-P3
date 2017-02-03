@@ -6,7 +6,7 @@ The deep learning architecture is mainly follow the Nvidia paper (train_model.py
 training data is record from 50Hz Linux Simulator, 
 test model on 10Hz Mac Simulator
 
-changed drive.py to have same resized image as training
+changed drive.py to have same resized and normalized image as training, and make the throttle higher to 0.3
 
-the current result is on Youtube:
-https://youtu.be/_p_6cAVHrHk
+the result is on Youtube:
+https://youtu.be/3AdUvpxXzrw
