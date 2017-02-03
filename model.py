@@ -82,7 +82,7 @@ def build_model():
 
 def train_model(model):
     history = model.fit_generator(get_batch(), samples_per_epoch=len(y_train_data),
-                                  nb_epoch=120)
+                                  nb_epoch=30)
     f = open('model.json', 'w')
     f.write(model.to_json())
     f.close()
