@@ -5,7 +5,7 @@ My deep learning architecture is mainly follow the Nvidia paper (in model.py):
 
 (resize/input)3@160x80 -> (conv/maxpool)24@78x38 -> (conv/maxpool)36@37x17 -> (conv/maxpool)48@16x6 -> (conv/maxpool)64@14x4 -> (conv/maxpool)72@12x2 -> (conv)84@11x1 -> (flatten)924 -> (fc)100 -> (fc)50 -> (fc)10 -> (fc/output)1
 
-the changes need to notice here are:
+the changes need to notice here are:  
 1. the input image size is tuned according to the training data  
 2. Use maxpooling instead of conv kernel stride for those conv layers after the first one (notice the variable in build_model() still named kernel_sizes)  
 3. Add dropout layer for all the hidden layers with dropout value 0.5 to reduce overfit  
