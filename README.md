@@ -18,6 +18,9 @@ training data is record from 50Hz Linux Simulator, with keyboard (so there maybe
 generated 70k+ ordinary driving images and 30k+ swing back data (also some pullover-recovery data not used for training)    
 test model on 10Hz Mac Simulator  
 
+Test data:  
+test data is randomly picked from training data, set aside 10% of total images generated as test set (around 10k)
+
 
 Change to Drive.py:  
 changed drive.py to have same resized and normalized image as training, and make the throttle higher to 0.3  
