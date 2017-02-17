@@ -74,7 +74,11 @@ Here is a visualization of the architecture
 #### Training data:  
 training data is record from 50Hz Linux Simulator, with keyboard (so there maybe some zigzag), only center camera images are used for training  
 generated 70k+ ordinary driving images and 30k+ swing back data (also some pullover-recovery data not used for training)    
-test model on 10Hz Mac Simulator  
+test model on 10Hz Mac Simulator.  
+data count for different steering range as follow:
+
+![alt hist1](https://raw.githubusercontent.com/qitong/SDC-P3/master/demonstration_images/other/straight.png)
+![alt hist2](https://raw.githubusercontent.com/qitong/SDC-P3/master/demonstration_images/other/recovery.png)
 
 #### Validation data:  
 validation data is randomly picked from training data, set aside 10% of total images generated as test set (around 10k)
